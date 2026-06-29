@@ -1,4 +1,4 @@
-# Ethernaut Foundry Solutions 2023 - by JohnnyTime
+# Ethernaut Foundry Solutions 2026 - by JohnnyTime
 
 ## Installation
 1. If you haven't already, install Foundry on your machine, using the following commands:
