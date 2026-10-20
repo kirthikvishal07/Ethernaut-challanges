@@ -1,19 +1,42 @@
-//SPDX-License-Identifier: MIT
+
+ // SPDX-License-Identifier: MIT
 pragma solidity ^0.8.0;
 
 import {Script} from "lib/forge-std/src/Script.sol";
-import {SimpleToken}  from "src/ethernaut17.sol";
-import {console} from "lib/forge-std/src/console.sol";
+import {MagicNum} from "src/ethernaut18.sol";
 
-contract ethernaut17Script is Script{
-SimpleToken instance = SimpleToken(payable(0x21cF2d7E889E6c6380d581db5cf9CB16e96dfCcc));   
- function run() public{
+contract ethernaut18Script is Script {
+    MagicNum instance =
+        MagicNum(payable(0xBfe2B6A46B4BF306922098c88Bb68AFc408BE5D8));
+
+    function run() public {
         vm.startBroadcast(vm.envUint("PRIVATE_KEY"));
 
-        instance.destroy(payable(address(0xbf2B63cCeE4d24F63c138b6a9b82ef14f6793779)));
+        Attacker attack = new Attacker(instance);
 
         vm.stopBroadcast();
     }
 }
 
+contract Attacker {
+    constructor(MagicNum target) {
+        // Creation code + 10-byte runtime code.
+        bytes memory bytecode =
+            hex"600a600c600039600a6000f3602a60005260206000f3";
 
+        address solver;
+
+        assembly {
+            solver := create(
+                0,
+                add(bytecode, 0x20),
+                mload(bytecode)
+            )
+        }
+
+        require(solver != address(0), "Solver deployment failed");
+        require(solver.code.length == 10, "Invalid runtime size");
+
+        target.setSolver(solver);
+    }
+}
