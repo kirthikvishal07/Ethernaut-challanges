@@ -25,6 +25,8 @@ contract ethernaut23Script is Script{
 
        console.log("attacker address : ",address(attac));
        console.log("Pending admin:", instance.pendingAdmin());
+       console.log("Pending admin:", instance.pendingAdmin());
+
        console.log("Wallet owner:", wallet.owner());  
        console.log("proxy owner: ",instance.admin());
 
